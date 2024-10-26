@@ -2,7 +2,7 @@ const pool = require('../config/db');
 
 const selectAll = async (type = '') => {
     let query = 'select * from eventos';
-    let params = []
+    let params = [];
     if (type) {
         query += ' where tipoDeporte = ?';
         params.push(type)
@@ -37,6 +37,16 @@ const selectUpcoming = async () => {
     return result[0];
 }
 
+const insertEvent = async ({ nombre, descripcion, fecha, ubicacion, tipoDeporte }) => {
+    const [result] = await pool.query(
+        'insert into eventos (nombre, descripcion, fecha, ubicacion, tipoDeporte) values ?,?,?,?,?', [nombre, descripcion, fecha, ubicacion, tipoDeporte]
+    )
+    if (result.affectedRows === 0) {
+        return -1;
+    }
+    return result.insertId;
+}
+
 module.exports = {
-    selectAll, selectById, selectFromTo, selectUpcoming
+    selectAll, selectById, selectFromTo, selectUpcoming, insertEvent
 }

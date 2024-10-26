@@ -12,4 +12,7 @@ GET {{host}}/api/users/profile
 
 ###
 
-GET {{host}}/api/events
+GET {{host}}/api/events?tipo=futbol
+
+###
+GET {{host}}/api/events/12
