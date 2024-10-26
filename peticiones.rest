@@ -1,0 +1,15 @@
+@host = http://localhost:3000
+
+
+POST {{host}}/api/users/register
+
+###
+POST {{host}}/api/users/login
+
+###
+GET {{host}}/api/users/profile
+
+
+###
+
+GET {{host}}/api/events
