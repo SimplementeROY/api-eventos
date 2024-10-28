@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
-const { insertUsuario, selectById, selectByName } = require('../models/users.model')
+const { insertUsuario, selectById, selectByName } = require('../models/users.model');
+const jwt = require('jsonwebtoken')
 const { createToken } = require('../utils/helpers')
 const registro = async (req, res, next) => {
     req.body.password = bcrypt.hashSync(req.body.password, 8);
@@ -43,7 +44,9 @@ const login = async (req, res, next) => {
 
 const perfil = async (req, res, next) => {
     try {
-        res.send('Hola')
+        const data = jwt.decode(req.headers.authorization)
+        const usuario = await selectById(data.usuario_id);
+        res.json(usuario)
     } catch (error) {
         next(error)
     }
