@@ -1,5 +1,4 @@
-const { selectAll, selectById, selectFromTo, selectUpcoming, insertEvent } = require("../models/events.model")
-const { get } = require("../routes/api/users.routes")
+const { selectAll, selectById, selectFromTo, selectUpcoming, insertEvent, deleteEventFromId } = require("../models/events.model")
 
 const getAll = async (req, res, next) => {
     const { tipo } = req.query
@@ -21,11 +20,13 @@ const getById = async (req, res, next) => {
     }
 }
 
-const getByDate = async (req, res, next) => {
+const getFromDateToDate = async (req, res, next) => {
     const { from, to } = req.query;
+
     try {
         const result = await selectFromTo(from, to);
         res.json(result)
+
     }
     catch (error) {
         next(error)
@@ -38,13 +39,28 @@ const getByUpcoming = async (req, res, next) => {
         res.json(result)
     }
     catch (error) {
-
+        next(error)
     }
 }
 
 const createEvent = async (req, res, next) => {
     try {
         const result = await insertEvent(req.body)
+        if (result === -1) {
+            res.status(404).json({ message: "El evento no ha podido ser creado" })
+        }
+        const evento = await selectById(result);
+        res.json(evento)
+    }
+    catch (error) {
+        next(error)
+    }
+}
+
+const updateEvent = async (req, res, next) => {
+    const { eventID } = req.params;
+    try {
+        const result = await updateEventById(eventID);
         res.json(result)
     }
     catch (error) {
@@ -52,22 +68,16 @@ const createEvent = async (req, res, next) => {
     }
 }
 
-const updateEvent = (req, res, next) => {
+const deleteEvent = async (req, res, next) => {
+    const { eventID } = req.params
     try {
-
+        const evento = await selectById(eventID);
+        await deleteEventFromId(eventID)
+        res.json(evento)
     }
     catch (error) {
-
+        next(error)
     }
 }
 
-const deleteEvent = (req, res, next) => {
-    try {
-
-    }
-    catch (error) {
-
-    }
-}
-
-module.exports = { getAll, getByDate, getById, getByUpcoming, createEvent, updateEvent, deleteEvent }
+module.exports = { getAll, getFromDateToDate, getById, getByUpcoming, createEvent, updateEvent, deleteEvent }

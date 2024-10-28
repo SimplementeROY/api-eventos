@@ -20,21 +20,20 @@ const selectById = async (eventID) => {
     return result[0];
 }
 
-//TODO
 const selectFromTo = async (date1, date2) => {
     const [result] = await pool.query(
         'select *  from eventos  where fecha between ? and ? order by fecha asc',
         [date1, date2]
     );
     if (result.length === 0) return null;
-    return result[0];
+    return result;
 }
 
 const selectUpcoming = async () => {
     const [result] = await pool.query(
         'select * from eventos  where fecha > curdate() order by fecha asc');
     if (result.length === 0) return null;
-    return result[0];
+    return result;
 }
 
 const insertEvent = async ({ nombre, descripcion, fecha, ubicacion, tipoDeporte }) => {
@@ -47,6 +46,19 @@ const insertEvent = async ({ nombre, descripcion, fecha, ubicacion, tipoDeporte 
     return result.insertId;
 }
 
+const updateEventById = async (eventID, { nombre, descripcion, fecha, ubicacion, tipoDeporte }) => {
+    const [result] = await pool.query(
+        'update eventos set nombre = ?, descripcion = ?, fecha = ?, ubicacion = ?, tipoDeporte = ? where id = ?',
+        [nombre, descripcion, fecha, ubicacion, tipoDeporte, eventID]
+    );
+    return result;
+}
+
+const deleteEventFromId = async (eventID) => {
+    const result = await pool.query('delete from eventos where id = ? ', [eventID]);
+    return result
+}
+
 module.exports = {
-    selectAll, selectById, selectFromTo, selectUpcoming, insertEvent
+    selectAll, selectById, selectFromTo, selectUpcoming, insertEvent, updateEventById, deleteEventFromId
 }

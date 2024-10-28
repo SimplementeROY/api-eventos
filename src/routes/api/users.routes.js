@@ -1,10 +1,9 @@
 const router = require('express').Router()
 
-const { getUsers } = require('../../controllers/users.controllers')
+const { perfil, registro, login } = require('../../controllers/users.controllers')
 
-router.get('/', getUsers) // Agregar funcion
-// router.post('/register')
-// router.post('/login')
-// router.get('/profile')
+router.post('/register', registro)
+router.post('/login', login)
+router.get('/profile', perfil)
 
 module.exports = router

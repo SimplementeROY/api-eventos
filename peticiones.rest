@@ -1,18 +1,40 @@
 @host = http://localhost:3000
 
-
+#Usuario: organizador5
+#Contraseña: 1234
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjo1LCJpYXQiOjE3MzAxMzY2ODF9.FaBTV5_RF25ezhGmwPWjyMP9XsmA0qCrjIBbVEI5U2Q
+# Peticiones de usuarios
 POST {{host}}/api/users/register
+Content-Type: application/json
 
+{
+    "username": "organizador5",
+    "password": "1234"
+}
 ###
 POST {{host}}/api/users/login
+Content-Type: application/json
 
+{
+    "username": "organizador5",
+    "password": "1234"
+}
 ###
 GET {{host}}/api/users/profile
 
-
+# Peticiones de eventos
 ###
 
-GET {{host}}/api/events?tipo=futbol
-
+GET {{host}}/api/events
+Authorization: {{token}}
 ###
-GET {{host}}/api/events/12
+GET {{host}}/api/events/1
+Authorization: {{token}}
+###
+
+GET {{host}}/api/events/date?from=2023-01-10&to=2024-01-2
+Authorization: {{token}}
+###
+
+GET {{host}}/api/events/upcoming
+Authorization: {{token}}
