@@ -1,16 +1,26 @@
 @host = http://localhost:3000
 
-#Usuario: organizador5
-#Contraseña: 1234
 #Token del usuario:
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjoxLCJpYXQiOjE3MzAxOTAzNjJ9.9gXmd_HQ4pO8tPfU0ZbsTwOg3gmxy73L-Dm_hoxU6ZI
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjo0LCJpYXQiOjE3MzAzMDQwNzZ9.ny4BmADIDgkct1GzFaMW1poEAE6J8jNIUTSOeYhjm7g
+
 # Peticiones de usuarios
+#Registro de un usuario regular
 POST {{host}}/api/users/register
 Content-Type: application/json
 
 {
-    "username": "organizador7",
+    "username": "organizador3",
     "password": "1234"
+}
+###
+#Registro de un usuario admin
+POST {{host}}/api/users/register
+Content-Type: application/json
+
+{
+    "username": "organizador2",
+    "password": "1234",
+    "rol": "admin"
 }
 ###
 POST {{host}}/api/users/login
@@ -24,13 +34,19 @@ Content-Type: application/json
 GET {{host}}/api/users/profile
 Authorization: {{token}}
 
+
+
+
 # Peticiones de eventos
 ###
-
 GET {{host}}/api/events
 Authorization: {{token}}
+
 ###
-GET {{host}}/api/events/1
+GET {{host}}/api/events?tipo=futbol
+Authorization: {{token}}
+###
+GET {{host}}/api/events/5
 Authorization: {{token}}
 ###
 

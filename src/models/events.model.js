@@ -13,7 +13,7 @@ const selectAll = async (type = '') => {
 
 const selectById = async (eventID) => {
     const [result] = await pool.query(
-        'select e.id, e.nombre, e.descripcion, e.fecha, e.ubicacion, e.tipoDeporte, u.username from eventos where id = ?',
+        'select e.id, e.nombre, e.descripcion, e.fecha, e.ubicacion, e.tipoDeporte, u.username from eventos as e inner join usuarios as u on e.organizador_id = u.id where e.id = ?',
         [eventID]
     );
     if (result.length === 0) return null;
