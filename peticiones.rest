@@ -3,13 +3,13 @@
 #Usuario: organizador5
 #Contraseña: 1234
 #Token del usuario:
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjo1LCJpYXQiOjE3MzAxMzc4Mzd9.J5wSkkkdiiFHU2kO8PKbjIvZWqWo7iSXwPJl2OiAS40
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjoxLCJpYXQiOjE3MzAxOTAzNjJ9.9gXmd_HQ4pO8tPfU0ZbsTwOg3gmxy73L-Dm_hoxU6ZI
 # Peticiones de usuarios
 POST {{host}}/api/users/register
 Content-Type: application/json
 
 {
-    "username": "organizador5",
+    "username": "organizador7",
     "password": "1234"
 }
 ###
@@ -17,12 +17,13 @@ POST {{host}}/api/users/login
 Content-Type: application/json
 
 {
-    "username": "organizador5",
+    "username": "organizador1",
     "password": "1234"
 }
 ###
 GET {{host}}/api/users/profile
 Authorization: {{token}}
+
 # Peticiones de eventos
 ###
 

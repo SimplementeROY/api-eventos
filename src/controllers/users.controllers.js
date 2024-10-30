@@ -5,6 +5,10 @@ const { createToken } = require('../utils/helpers')
 const registro = async (req, res, next) => {
     req.body.password = bcrypt.hashSync(req.body.password, 8);
     try {
+        const existe = await selectByName(req.body.username);
+        if (existe) {
+            return res.status(400).json({ message: 'Usuario no disponible' });
+        }
         const result = await insertUsuario(req.body);
         if (result === -1) {
             return res.status(400).json({ message: 'La inserción no se ha realizado' });
@@ -44,9 +48,7 @@ const login = async (req, res, next) => {
 
 const perfil = async (req, res, next) => {
     try {
-        const data = jwt.decode(req.headers.authorization)
-        const usuario = await selectById(data.usuario_id);
-        res.json(usuario)
+        res.json(req.user)
     } catch (error) {
         next(error)
     }

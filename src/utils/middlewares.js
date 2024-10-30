@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const { selectById } = require('../models/events.model');
+const { selectById } = require('../models/users.model');
 
 exports.checkToken = async (req, res, next) => {
     // Comprobar si el token viene incluido en la cabecera Authorization
@@ -14,7 +14,7 @@ exports.checkToken = async (req, res, next) => {
     // TODO: Mover la clave al fichero de entorno
     let data;
     try {
-        data = jwt.verify(token, 'en un lugar de la mancha');
+        data = jwt.verify(token, process.env.KEY);
     } catch (error) {
         return res.status(403).json({ message: 'El token de autenticación es incorrecto' });
     }
@@ -30,5 +30,12 @@ exports.checkToken = async (req, res, next) => {
     // Colocamos el usuario dentro de la petición
     req.user = usuario;
 
+    next();
+}
+
+exports.checkAdmin = (req, res, next) => {
+    if (req.user.role !== 'admin') {
+        return res.status(403).json({ message: 'Solo puedes entrar si eres admin' });
+    }
     next();
 }
