@@ -1,7 +1,7 @@
 @host = http://localhost:3000
 
 #Token del usuario:
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjo0LCJpYXQiOjE3MzAzMDQwNzZ9.ny4BmADIDgkct1GzFaMW1poEAE6J8jNIUTSOeYhjm7g
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjo0LCJpYXQiOjE3MzAzNjE2MzR9.NSW8xvk9MF7u34V_fuIj3W5ESuNvnie6tx22Hm3sfQ4
 
 # Peticiones de usuarios
 #Registro de un usuario regular
@@ -35,8 +35,6 @@ GET {{host}}/api/users/profile
 Authorization: {{token}}
 
 
-
-
 # Peticiones de eventos
 ###
 GET {{host}}/api/events
@@ -46,7 +44,7 @@ Authorization: {{token}}
 GET {{host}}/api/events?tipo=futbol
 Authorization: {{token}}
 ###
-GET {{host}}/api/events/5
+GET {{host}}/api/events/26
 Authorization: {{token}}
 ###
 
@@ -55,4 +53,22 @@ Authorization: {{token}}
 ###
 
 GET {{host}}/api/events/upcoming
+Authorization: {{token}}
+
+###
+
+POST {{host}}/api/events
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+    "nombre": "test",
+    "descripcion": "Un evento de testeo",
+    "fecha": "2025-09-10",
+    "ubicacion": "En un país multicolor",
+    "tipoDeporte": "Furbo"
+}
+
+###
+DELETE {{host}}/api/events/3
 Authorization: {{token}}

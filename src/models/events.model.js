@@ -1,7 +1,7 @@
 const pool = require('../config/db');
 
 const selectAll = async (type = '') => {
-    let query = 'select e.id, e.nombre, e.descripcion, e.fecha, e.ubicacion, e.tipoDeporte, u.username from eventos as e inner join usuarios as u on e.organizador_id = u.id';
+    let query = "select e.id, e.nombre, e.descripcion, DATE_FORMAT(fecha, '%Y-%m-%d') as fecha, e.ubicacion, e.tipoDeporte, u.username as organizador from eventos as e inner join usuarios as u on e.organizador_id = u.id";
     let params = [];
     if (type) {
         query += ' where tipoDeporte = ?';
@@ -13,7 +13,7 @@ const selectAll = async (type = '') => {
 
 const selectById = async (eventID) => {
     const [result] = await pool.query(
-        'select e.id, e.nombre, e.descripcion, e.fecha, e.ubicacion, e.tipoDeporte, u.username from eventos as e inner join usuarios as u on e.organizador_id = u.id where e.id = ?',
+        "select e.id, e.nombre, e.descripcion, DATE_FORMAT(fecha, ' % Y -% m -% d') as fecha, e.ubicacion, e.tipoDeporte, u.username as organizador from eventos as e inner join usuarios as u on e.organizador_id = u.id where e.id = ?",
         [eventID]
     );
     if (result.length === 0) return null;
@@ -22,7 +22,7 @@ const selectById = async (eventID) => {
 
 const selectFromTo = async (date1, date2) => {
     const [result] = await pool.query(
-        'select e.id, e.nombre, e.descripcion, e.fecha, e.ubicacion, e.tipoDeporte, u.username from eventos as e inner join usuarios as u on e.organizador_id = u.id where fecha between ? and ? order by fecha asc',
+        "select e.id, e.nombre, e.descripcion, DATE_FORMAT(fecha, '%Y-%m-%d') as fecha, e.ubicacion, e.tipoDeporte, u.username as organizador from eventos as e inner join usuarios as u on e.organizador_id = u.id where fecha between ? and ? order by fecha asc",
         [date1, date2]
     );
     if (result.length === 0) return null;
@@ -31,14 +31,14 @@ const selectFromTo = async (date1, date2) => {
 
 const selectUpcoming = async () => {
     const [result] = await pool.query(
-        'select e.id, e.nombre, e.descripcion, e.fecha, e.ubicacion, e.tipoDeporte, u.username from eventos as e inner join usuarios as u on e.organizador_id = u.id where fecha > curdate() order by fecha asc');
+        "select e.id, e.nombre, e.descripcion, DATE_FORMAT(fecha, '%Y-%m-%d') as fecha, e.ubicacion, e.tipoDeporte, u.username as organizador from eventos as e inner join usuarios as u on e.organizador_id = u.id where fecha > curdate() order by fecha asc");
     if (result.length === 0) return null;
     return result;
 }
 
 const insertEvent = async ({ nombre, descripcion, fecha, ubicacion, tipoDeporte }, organizador) => {
     const [result] = await pool.query(
-        'insert into eventos (nombre, descripcion, fecha, ubicacion, tipoDeporte, organizador_id) values ?,?,?,?,?', [nombre, descripcion, fecha, ubicacion, tipoDeporte, organizador]
+        'insert into eventos (nombre, descripcion, fecha, ubicacion, tipoDeporte, organizador_id) values (?,?,?,?,?,?)', [nombre, descripcion, fecha, ubicacion, tipoDeporte, organizador]
     )
     if (result.affectedRows === 0) {
         return -1;

@@ -45,7 +45,7 @@ const getByUpcoming = async (req, res, next) => {
 
 const createEvent = async (req, res, next) => {
     try {
-        const result = await insertEvent(req.body, req.usuario_id)
+        const result = await insertEvent(req.body, req.user.id)
         if (result === -1) {
             res.status(404).json({ message: "El evento no ha podido ser creado" })
         }
