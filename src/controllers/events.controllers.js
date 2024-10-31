@@ -50,7 +50,7 @@ const createEvent = async (req, res, next) => {
             res.status(404).json({ message: "El evento no ha podido ser creado" })
         }
         const evento = await selectById(result);
-        res.json(evento)
+        res.status(201).json(evento)
     }
     catch (error) {
         next(error)

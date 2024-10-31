@@ -1,8 +1,7 @@
-# Express Base Application for API Creation
+# Cómo validar esta API
 
-This is a basic Express application template designed to help you create APIs
-quickly. It includes essential configurations and setup for starting an Express
-server.
+Hola quien sea que valide esto
+## 1. 
 
 ## Features
 
