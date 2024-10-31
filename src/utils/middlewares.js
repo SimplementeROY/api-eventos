@@ -34,7 +34,7 @@ exports.checkToken = async (req, res, next) => {
 }
 
 exports.checkAdmin = (req, res, next) => {
-    if (req.user.role !== 'admin') {
+    if (req.user.rol !== 'admin') {
         return res.status(403).json({ message: 'Solo puedes hacer esta acción si eres admin' });
     }
     next();
