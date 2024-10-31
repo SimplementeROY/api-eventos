@@ -6,8 +6,17 @@
 
 ```bash
 PASSWORD=''
+
 DATABASE=''
+
 KEY=''
+
+USER=''
+
+HOST='
 ```
 
-## 3. Con eso hecho deberia funcionar 👍
+## 3. Rellena las variables con los datos que se piden. (La variable KEY es solo la clave para el JWT) 😖
+
+## 4. Con eso deberia funcionar 👍
+
