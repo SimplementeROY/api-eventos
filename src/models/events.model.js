@@ -1,7 +1,7 @@
 const pool = require('../config/db');
 
 const selectAll = async (type = '') => {
-    let query = "select e.id, e.nombre, e.descripcion, DATE_FORMAT(fecha, '%Y-%m-%d') as fecha, e.ubicacion, e.tipoDeporte, u.username as organizador from eventos as e inner join usuarios as u on e.organizador_id = u.id";
+    let query = "select e.id, e.nombre, e.descripcion, DATE_FORMAT(fecha, '%Y-%m-%d') as fecha, e.ubicacion, e.tipoDeporte, u.username as organizador from eventos as e inner join usuarios as u on e.organizador_id = u.id order by e.id";
     let params = [];
     if (type) {
         query += ' where tipoDeporte = ?';
