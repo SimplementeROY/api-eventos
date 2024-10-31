@@ -3,8 +3,9 @@
 #Token del usuario:
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvX2lkIjo1LCJpYXQiOjE3MzAzNjQwNzB9.8BTAAIH_P9m32hJCCEC_yfo_HapWwfj1C6lEZdpFHmM
 
-# Peticiones de usuarios
-#Registro de un usuario regular
+// Peticiones de usuarios
+
+//Registro de un usuario regular
 POST {{host}}/api/users/register
 Content-Type: application/json
 
@@ -35,28 +36,42 @@ GET {{host}}/api/users/profile
 Authorization: {{token}}
 
 
-# Peticiones de eventos
+// Peticiones de eventos
+
+// Se recuperará la información de todos los eventos
 ###
 GET {{host}}/api/events
 Authorization: {{token}}
 
+
+// Se recupera la información de todos los eventos en el que su tipo sea fútbol
 ###
 GET {{host}}/api/events?tipo=futbol
 Authorization: {{token}}
-###
-GET {{host}}/api/events/26
-Authorization: {{token}}
-###
 
+
+// Se recupera la información del evento que hayas puesto
+// Cambia el numero por si quieres ver la información de otro evento
+###
+GET {{host}}/api/events/36
+Authorization: {{token}}
+
+
+// Se recupera la información entre dos fechas
+// Si quieres cambiar de fechas, por favor, utilice el formato YYYY-MM-DD, por ejemplo: 2024-05-06
+###
 GET {{host}}/api/events/date?from=2023-01-10&to=2024-01-2
 Authorization: {{token}}
-###
 
+
+// Se recupera la información de los próximos eventos que ocurrirán
+###
 GET {{host}}/api/events/upcoming
 Authorization: {{token}}
 
-###
 
+// Se inserta un nuevo evento si le pasas la siguiente información. El organizador que tendrá este evento será el usuario que se haya logado previamente. Por favor, asegurese de que el formato de la fecha sea: YYYY-MM-DD, por ejemplo, 2024-05-06
+###
 POST {{host}}/api/events
 Authorization: {{token}}
 Content-Type: application/json
@@ -69,6 +84,23 @@ Content-Type: application/json
     "tipoDeporte": "Furbo"
 }
 
+
+// Se actualiza el evento con el ID que se le indique. Asegurese de poner todos los campos a actulizar y los que no, que o sino peta
+###
+PUT {{host}}/api/events/1
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+    "nombre": "Nombre cambiado",
+    "descripcion": "Un evento de testeo",
+    "fecha": "2025-09-11",
+    "ubicacion": "aoishdaids",
+    "tipoDeporte": "Baloncesto"
+}
+
+
+// Se eleminará el evento con el ID que se el indique. Sólo un usuario con rol admin podrá realizar esta petición
 ###
 DELETE {{host}}/api/events/33
 Authorization: {{token}}

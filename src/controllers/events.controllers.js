@@ -69,11 +69,12 @@ const createEvent = async (req, res, next) => {
 const updateEvent = async (req, res, next) => {
     const { eventID } = req.params;
     try {
-        const result = await updateEventById(eventID);
+        const result = await updateEventById(eventID, req.body);
         if (!result) {
             return res.status(404).json({ message: 'No se ha podido actualizar el evento' })
         }
-        res.json(result)
+        const event = await selectById(eventID)
+        res.json({ message: "Evento actualizado con éxito", event })
     }
     catch (error) {
         next(error)
