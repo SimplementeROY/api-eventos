@@ -1,6 +1,6 @@
 # Paso importante a para hacer funcionar esta API
 
-> [! Warning]
+> [!WARNING]
 > Esta API se ha hecho con una base de datos MySQL con dos tablas relacionadas entre sí.
 
 
