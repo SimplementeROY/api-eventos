@@ -4,24 +4,24 @@
 > Esta API se ha hecho con una base de datos MySQL con dos tablas llamadas 'eventos' y 'usuarios' relacionadas entre sí.
 > La estructura de la tabla eventos es esta:
 ``` bash
-    {
-        "id": 1,
-        "nombre": "Maratón de Primavera",
-        "descripcion": "Carrera de 10km por la ciudad.",
-        "fecha": "2023-09-15",
-        "ubicacion": "Madrid",
-        "tipoDeporte": "Atletismo",
-        "organizador_id": 1 
+{
+    "id": 1,
+    "nombre": "Maratón de Primavera",
+    "descripcion": "Carrera de 10km por la ciudad.",
+    "fecha": "2023-09-15",
+    "ubicacion": "Madrid",
+    "tipoDeporte": "Atletismo",
+    "organizador_id": 1 
     }
 ```
-> Y la estrucura de usuarios es esta:
+> Y la estrucura de la tabla usuarios es esta:
 ``` bash
-    {
+{
     "id": 1,
     "username": "organizador1",
     "password": "hashed_password",
     "rol": "regular o admin (por defecto está en regular)"
-    }
+}
 ```
 
 
