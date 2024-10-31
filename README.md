@@ -31,18 +31,18 @@
 
 
 ```bash
-PASSWORD=''
+USER='' #Usuario del MySQL
 
-DATABASE=''
+PASSWORD='' #Contraseña del usuario
 
-KEY=''
+DATABASE='' #Nombre de la base de datos
 
-USER=''
+KEY='' #La palabra secreta que servirá para firmar el Token
 
-HOST='
+HOST='' #La dirección de la base de datos, por ejemplo, localhost
 ```
 
-## 3. Rellena las variables con los datos que se piden. (La variable KEY es solo la clave para el JWT) 😖
+## 3. Rellena las variables con los datos que se piden. 😖
 
-## 4. Con eso deberia funcionar 👍
+## 4. Con eso deberia funcionar. 👍
 
